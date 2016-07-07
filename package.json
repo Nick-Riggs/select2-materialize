@@ -1,0 +1,20 @@
+{
+  "name": "select2-materialize",
+  "description": "Materialize CSS for Jquery Select2",
+  "version": "0.1.8",
+  "license": "MIT",
+  "keywords": [
+    "material",
+    "select2",
+    "materializecss"
+  ],
+  "author": "Nick Riggs <nicholasriggs@gmail.com>",
+  "contributors": [
+    "cesarve77"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Nick-Riggs/select2-materialize.git"
+  },
+  "main": "./index.js"
+}
