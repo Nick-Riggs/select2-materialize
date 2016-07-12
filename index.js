@@ -16,4 +16,12 @@ $(document).ready(function() {
         $parent.children("label").removeClass("active").removeClass("focus");
         $parent.find(".select2-selection").removeClass("focus");
     });
+
+    $(document).on("select2:unselect", "select", function(e) {
+        if (!e.params.originalEvent) {
+            return;
+        }
+
+        e.params.originalEvent.stopPropagation();
+    });
 });
