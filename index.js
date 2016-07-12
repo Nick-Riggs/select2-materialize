@@ -1,5 +1,19 @@
 $(document).ready(function() {
-    $(document).on("focus", "input.select2-search__field", function () {
-        $(this).parents(".select2").parent().find("label").addClass("active");
+    $("select").on("select2:open", function() {
+        var $parent = $(this).parent();
+
+        $parent.children("label").addClass("active").addClass("focus");
+        $parent.find(".select2-selection").addClass("focus");
+    });
+
+    $("select").on("select2:close", function() {
+        if ($(this).children(":selected").length) {
+            return;
+        }
+
+        var $parent = $(this).parent();
+
+        $parent.children("label").removeClass("active").removeClass("focus");
+        $parent.find(".select2-selection").removeClass("focus");
     });
 });
