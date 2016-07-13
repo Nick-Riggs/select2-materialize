@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(document).on("select2:open", "select", function() {
+    $(document).on("select2:open select2:focus", "select", function() {
         var $parent = $(this).parent();
 
         $parent.children("label").addClass("active").addClass("focus");
@@ -7,14 +7,32 @@ $(document).ready(function() {
     });
 
     $(document).on("select2:close", "select", function() {
-        if ($(this).children(":selected").length) {
-            return;
-        }
-
+        var $this = $(this);
         var $parent = $(this).parent();
+        var $input = $parent.find("input.select2-search__field");
 
-        $parent.children("label").removeClass("active").removeClass("focus");
-        $parent.find(".select2-selection").removeClass("focus");
+        clearTimeout($this.data("blurring"));
+
+        $this.data("blurring", setTimeout(function() {
+            if ($input.is(":focus")) {
+                return;
+            }
+
+            $parent.children("label").removeClass("focus");
+            $parent.find(".select2-selection").removeClass("focus");
+
+            if ($this.children(":selected").length) {
+                return;
+            }
+
+            $parent.children("label").removeClass("active");
+        }));
+    });
+
+    $(document).on("blur", ".select2 input.select2-search__field", function() {
+        setTimeout(function() {
+            $(this).parents(".select2").siblings("select").trigger("select2:close");
+        }.bind(this), 100);
     });
 
     $(document).on("select2:unselect", "select", function(e) {
