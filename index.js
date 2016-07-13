@@ -1,9 +1,14 @@
 $(document).ready(function() {
     $(document).on("select2:open select2:focus", "select", function() {
+        var $this = $(this);
         var $parent = $(this).parent();
 
-        $parent.children("label").addClass("active").addClass("focus");
-        $parent.find(".select2-selection").addClass("focus");
+        clearTimeout($this.data("blurring"));
+
+        $this.data("blurring", setTimeout(function() {
+            $parent.children("label").addClass("active").addClass("focus");
+            $parent.find(".select2-selection").addClass("focus");
+        }));
     });
 
     $(document).on("select2:close", "select", function() {
@@ -32,6 +37,12 @@ $(document).ready(function() {
     $(document).on("blur", ".select2 input.select2-search__field", function() {
         setTimeout(function() {
             $(this).parents(".select2").siblings("select").trigger("select2:close");
+        }.bind(this), 100);
+    });
+
+    $(document).on("focus", ".select2 input.select2-search__field", function() {
+        setTimeout(function() {
+            $(this).parents(".select2").siblings("select").trigger("select2:open");
         }.bind(this), 100);
     });
 
