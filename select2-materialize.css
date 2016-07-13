@@ -654,7 +654,7 @@
 }
 
 .select2-container--default .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--multiple {
-    height: auto
+    height: 45.8px;
 }
 
 .select2-container--default .select2-search--inline .select2-search__field {
