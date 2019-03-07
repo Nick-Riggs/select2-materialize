@@ -26,7 +26,7 @@ $(document).ready(function() {
             $parent.children("label").removeClass("focus");
             $parent.find(".select2-selection").removeClass("focus");
 
-            if ($this.children(":selected").length) {
+            if ($this.find("option:selected").length) {
                 return;
             }
 
